@@ -1,4 +1,6 @@
 
+set(CMAKE_AUTOMOC ON)
+
 # all files which may be mocced
 set(qgvlib_qt_HDRS
   private/QGVCore.cpp
@@ -31,12 +33,13 @@ source_group("Header Files" FILES ${qgvlib_qt_HDRS})
 source_group("Generated Files" FILES ${yarpviz_qt_QRC_GEN_SRCS}
                                      ${yarpviz_qt_UI_GEN_SRCS})
 
-add_library(qgvcore SHARED
+add_library(qgvcore STATIC
             ${qgvlib_qt_SRCS}
             ${qgvlib_qt_HDRS} )
 
 target_link_libraries(qgvcore                      
                  	  ${GRAPHVIZ_GVC_LIBRARY}
                       ${GRAPHVIZ_CGRAPH_LIBRARY}
-                      ${GRAPHVIZ_CDT_LIBRARY})
-qtyarp_use_modules(qgvcore Widgets Gui)
+                      ${GRAPHVIZ_CDT_LIBRARY}
+                      Qt5::Widgets
+                      Qt5::Gui)
