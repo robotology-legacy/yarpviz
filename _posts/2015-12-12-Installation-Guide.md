@@ -3,31 +3,30 @@ layout: post
 title: "Installation Guide"
 categories: journal
 tags: [documentation,sample]
-image:
-  feature: computer.jpg
-  teaser: computer-teaser.jpg
-  credit: Death to Stock Photo
-  creditlink: ""
 ---
 
-Lagrange is a Jekyll theme that was built to be 100% compatible with [GitHub Pages](https://pages.github.com/). If you are unfamiliar with GitHub Pages, you can check out [their documentation](https://help.github.com/categories/github-pages-basics/) for more information. [Jonathan McGlone's guide](http://jmcglone.com/guides/github-pages/) on creating and hosting a personal site on GitHub is also a good resource.
 
-### What is Jekyll?
+### Dependencies
+ - Qt5
+ - GraphViz library
 
-Jekyll is a simple, blog-aware, static site generator for personal, project, or organization sites. Basically, Jekyll takes your page content along with template files and produces a complete website. For more information, visit the [official Jekyll site](https://jekyllrb.com/docs/home/) for their documentation.
 
-### Never Used Jekyll Before?
+### Linux
 
-The beauty of hosting your website on GitHub is that you don't have to actually have Jekyll installed on your computer. Everything can be done through the GitHub code editor, with minimal knowledge of how to use Jekyll or the command line. All you have to do is add your posts to the `_posts` directory and edit the `_config.yml` file to change the site settings. With some rudimentary knowledge of HTML and CSS, you can even modify the site to your liking.
+`sudo apt-get install libgraphviz-dev`
 
-This can all be done through the GitHub code editor, which acts like a content management system (CMS).
+### Windows
 
-### Quick-Start Guide
+Download and install the library from (http://www.graphviz.org/Download_windows.php).
 
-To start using Jekyll right away, [fork the Lagrange repository on GitHub](https://github.com/LeNPaul/Lagrange/fork). From there, you can rename the repository to 'USERNAME.github.io', where 'USERNAME' is your GitHub username, and edit the `_config.yml` file to your liking. Ensure that you have a branch named `gh-pages`. Your website should be ready immediately at 'http://USERNAME.github.io'.
+Set `GRAPHVIZ_ROOT` to point the installed directory (usually `C:\Program Files\Graphviz2.38` or `C:\Program Files (x86)\Graphviz2.38`).
 
-Head over to the `_posts` directory to view all the posts that are currently on the website, and to see examples of what post files generally look like. You can simply just duplicate the template post and start adding your own content.
+Append `%GRAPHVIZ_ROOT%\bin` to your PATH variable.
 
-### Full Installation Guide
+### Installation
 
-For a full local installation of Lagrange, [download your own copy of Lagrange](https://github.com/LeNPaul/Lagrange/archive/gh-pages.zip) and unzip it into it's own directory. From there, open up your favorite command line tool, and enter `jekyll serve`. Your site should be up and running locally at [http://localhost:4000](http://localhost:4000).
+```
+$ cd yarpviz
+$ mkdir build; cd build;
+$ cmake ../; make
+```
