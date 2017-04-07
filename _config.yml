@@ -2,10 +2,10 @@
 title:              "Yarpviz"
 tagline:            "A graphical tool for profiling and visualizing Yarp network"
 description:        "A graphical tool for profiling and visualizing Yarp network"
-baseurl:            #"/Lagrange"
-url:                #"http://robotology.github.io/yarpviz/"
+baseurl:            #"/"
+url:                "http://robotology.github.io/yarpviz/"
 github:
-  url:              #"https://github.com/robotology/yarpviz"
+  url:              "http://robotology.github.io/yarpviz/"
 author:
   name:              "Ali Paikan"
   email:             "ali.paikan@iit.it"
