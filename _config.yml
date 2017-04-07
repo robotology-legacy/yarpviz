@@ -1,19 +1,19 @@
 # Site Settings
-title:               Lagrange
-tagline:             a minimalist Jekyll theme
-description:
+title:              "Yarpviz"
+tagline:            "A graphical tool for profiling and visualizing Yarp network"
+description:        "A graphical tool for profiling and visualizing Yarp network"
 baseurl:            #"/Lagrange"
-url:                #"https://lenpaul.github.io"
+url:                "http://robotology.github.io/yarpviz/"
 github:
-  url:               #"https://lenpaul.github.io/Lagrange"
+  url:              "https://github.com/robotology/yarpviz"
 author:
-  name:              "Paul Le"
-  email:             "l.nguyen.paul@gmail.com"
-  twitter:           "paululele"
-  instagram:         "paululele"
-  github:            "lenpaul"
-  facebook:          "Le.Paul.94"
-  linkedin:          "lenpaul"
+  name:              "Ali Paikan"
+  email:             "ali.paikan@iit.it"
+#  twitter:           "paululele"
+#  instagram:         "paululele"
+  github:            "apaikan"
+#  facebook:          "Le.Paul.94"
+  linkedin:          "apaikan"
 navigation:
 - title: About
   url: /about

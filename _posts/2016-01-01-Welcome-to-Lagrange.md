@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Welcome to Lagrange!"
+title: "Welcome to Yarpviz!"
 categories: journal
 tags: [documentation,sample]
 image:
   feature: mountains.jpg
-  teaser: mountains-teaser.jpg
-  credit: Death to Stock Photo
+  teaser: yarpviz-all.png
+  credit: iCub Facility
   creditlink: ""
 ---
 
