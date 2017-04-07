@@ -5,7 +5,7 @@ description:        "A graphical tool for profiling and visualizing Yarp network
 baseurl:            #"/"
 url:                "http://robotology.github.io/yarpviz/"
 github:
-  url:              "."
+  url:              "http://robotology.github.io/yarpviz/"
 author:
   name:              "Ali Paikan"
   email:             "ali.paikan@iit.it"
