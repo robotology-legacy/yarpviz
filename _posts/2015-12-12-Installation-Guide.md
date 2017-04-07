@@ -31,5 +31,3 @@ Head over to the `_posts` directory to view all the posts that are currently on 
 ### Full Installation Guide
 
 For a full local installation of Lagrange, [download your own copy of Lagrange](https://github.com/LeNPaul/Lagrange/archive/gh-pages.zip) and unzip it into it's own directory. From there, open up your favorite command line tool, and enter `jekyll serve`. Your site should be up and running locally at [http://localhost:4000](http://localhost:4000).
-
-The same process follows from above for adding new posts and content to your site. For a full guide on using Lagrange, check out the [Working With Jekyll]({{ site.github.url }}{% post_url 2015-11-11-Working-With-Jekyll %}) post.
