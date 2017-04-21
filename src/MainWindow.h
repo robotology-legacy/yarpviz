@@ -19,7 +19,8 @@
 
 enum NodeItemType { UNKNOWN = 0,
                     MODULE = 1,
-                    PORT = 2 };
+                    PORT = 2,
+                    MACHINE = 3};
 
 
 class NodeWidgetItem : public QTreeWidgetItem {
@@ -33,6 +34,13 @@ public:
                   << " (" << vertex->property.find("pid").asInt() << ")";
             setText(0, lable.str().c_str());
         }
+        else if(dynamic_cast<MachineVertex*> (vertex))
+        {
+            std::stringstream lable;
+            lable << vertex->property.find("hostname").asString().c_str()
+                  << " (" << vertex->property.find("os").asString() << ")";
+            setText(0, lable.str().c_str());
+        }
         checkFlag = false;
         NodeWidgetItem::vertex = vertex;
     }
@@ -43,7 +51,7 @@ public:
         if(!checkFlag)
             vertex->property.put("hidden", true);
         else
-            vertex->property.unput("hidden");
+            vertex->property.put("hidden",false);
     }
 
     bool checked() { return checkFlag; }
@@ -72,9 +80,9 @@ public:
 
 private:
     void initScene();
-    void onNodeContextMenuProccess(QGVNode *node, YarpvizVertex* vertex);
     void onNodeContextMenuPort(QGVNode *node, YarpvizVertex* vertex);
     void updateNodeWidgetItems();
+    void populateTreeWidget();
 
 private slots:
     void nodeContextMenu(QGVNode* node);
@@ -86,9 +94,7 @@ private slots:
     void onLayoutPolyline();
     void onLayoutLine();
     void onLayoutCurved();
-    void onLayoutSubgraph();
-    void onHidePorts();
-    void onHideConnectionsLable();
+    void onUpdateGraph();
     void onNodesTreeItemClicked(QTreeWidgetItem *item, int column);
     void onWindowMessageBox();
     void onWindowItem();
@@ -97,6 +103,8 @@ private slots:
     void onUpdateQosStatus();
     void onConfigureConsQos();
     void onProfilePortsRate();
+    void onSubGraphContextMenuProcess(QGVSubGraph *node);
+    void onAbout();
 
 private:
     Ui::MainWindow *ui;
@@ -111,6 +119,9 @@ private:
     bool layoutSubgraph;
     QTreeWidgetItem *moduleParentItem;
     QTreeWidgetItem *portParentItem;
+    QTreeWidgetItem *machinesParentItem;
+    std::map<std::string, QGVSubGraph*> sceneSubGraphMap;
+    std::map<std::string, QGVNode*> sceneNodeMap;
 };
 
 #endif // MAINWINDOW_H

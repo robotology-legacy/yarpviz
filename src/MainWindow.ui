@@ -98,7 +98,7 @@
      <x>0</x>
      <y>0</y>
      <width>817</width>
-     <height>21</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -151,6 +151,8 @@
     <addaction name="separator"/>
     <addaction name="actionHidePorts"/>
     <addaction name="actionHideConnectionsLable"/>
+    <addaction name="actionHideDisconnectedPorts"/>
+    <addaction name="actionDebugMode"/>
    </widget>
    <widget class="QMenu" name="menuView_2">
     <property name="title">
@@ -181,6 +183,7 @@
    </attribute>
    <addaction name="actionProfile_YARP_network"/>
    <addaction name="separator"/>
+   <addaction name="actionDebugMode"/>
    <addaction name="actionHidePorts"/>
    <addaction name="actionHighlight_Loops"/>
   </widget>
@@ -341,6 +344,29 @@
   <action name="actionConfigure_connections_QOS">
    <property name="text">
     <string>&amp;Configure connections QOS...</string>
+   </property>
+  </action>
+  <action name="actionHideDisconnectedPorts">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Hide Disconnected Ports</string>
+   </property>
+  </action>
+  <action name="actionDebugMode">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="ress.qrc">
+     <normaloff>:/icons/resources/debugMode.svg</normaloff>:/icons/resources/debugMode.svg</iconset>
+   </property>
+   <property name="text">
+    <string>DebugMode</string>
+   </property>
+   <property name="toolTip">
+    <string>Check it to show yarplogger and &quot;/log&quot; ports</string>
    </property>
   </action>
  </widget>

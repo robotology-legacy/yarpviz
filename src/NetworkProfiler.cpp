@@ -151,31 +151,31 @@ bool NetworkProfiler::creatNetworkGraph(ports_detail_set details, yarp::graph::G
             port->property.put("orphan", true);
         graph.insert(*port);
 
-        //processor node (owner)
-        ProcessVertex* owner = new ProcessVertex(info.owner.pid, info.owner.hostname);
+        //process node (owner)
+        ProcessVertex* process = new ProcessVertex(info.owner.pid, info.owner.hostname);
         //prop.clear();
-        owner->property.put("name", info.owner.name);
-        owner->property.put("arguments", info.owner.arguments);
-        owner->property.put("hostname", info.owner.hostname);
-        owner->property.put("priority", info.owner.priority);
-        owner->property.put("policy", info.owner.policy);
-        owner->property.put("os", info.owner.os);
-        graph.insert(*owner);
+        process->property.put("name", info.owner.name);
+        process->property.put("arguments", info.owner.arguments);
+        process->property.put("hostname", info.owner.hostname);
+        process->property.put("priority", info.owner.priority);
+        process->property.put("policy", info.owner.policy);
+        process->property.put("os", info.owner.os);
+        process->property.put("hidden", false);
+        pvertex_iterator itrVert=graph.insert(*process);
+        // create connection between ports and its process
+        if(dynamic_cast<ProcessVertex*> (*itrVert))
+            port->setOwner((ProcessVertex*)(*itrVert));
 
-        // create connection between ports and its owner
-        if(info.inputs.size()) {
-            graph.insertEdge(*port, *owner, Property("(type ownership) (dir out)"));
-            port->property.put("dir", "in");            
-        }
-        if(info.outputs.size()) {
-            graph.insertEdge(*owner, *port, Property("(type ownership) (dir in)"));
-            port->property.put("dir", "out");        
-        }
-        port->setOwner(owner);
 
-        // TODO: shall we add unconnected ports?!!
+
+        //machine node (owner of the process)
+        MachineVertex* machine = new MachineVertex(info.owner.os, info.owner.hostname);
+        graph.insert(*machine);
+        //todo do the same done for the process.
+        process->setOwner(machine);
+
         if(!info.inputs.size() && !info.outputs.size())
-            graph.insertEdge(*owner, *port, Property("(type ownership) (dir unknown)"));
+            graph.insertEdge(*process, *port, Property("(type ownership) (dir unknown)"));
 
         // calculate progress
         if(NetworkProfiler::progCallback) {
@@ -249,6 +249,22 @@ bool NetworkProfiler::creatSimpleModuleGraph(yarp::graph::Graph& graph, yarp::gr
     subgraph.clear();
     pvertex_const_iterator itr;
     const pvertex_set& vertices = graph.vertices();
+    //insert machines
+    for(itr = vertices.begin(); itr!=vertices.end(); itr++) {
+
+        if(!dynamic_cast<MachineVertex*>(*itr))
+                continue;
+        else
+        {
+            MachineVertex* mv1 = dynamic_cast<MachineVertex*>(*itr);
+            MachineVertex* mv2 = new MachineVertex(mv1->property.find("os").asString(),
+                                                   mv1->property.find("hostname").asString());
+            mv2->property = mv1->property;
+
+            subgraph.insert(*mv2);
+        }
+    }
+
     for(itr = vertices.begin(); itr!=vertices.end(); itr++) {
         if(!dynamic_cast<ProcessVertex*>(*itr))
             continue;
