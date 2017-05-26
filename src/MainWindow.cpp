@@ -17,6 +17,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QtPrintSupport/QPrinter>
+#include <QInputDialog>
 
 #include <yarp/os/Random.h>
 #include <yarp/os/Time.h>
@@ -503,20 +504,27 @@ void MainWindow::onProfileYarpNetwork() {
 
     if(mainGraph.nodesCount()) {
         QMessageBox::StandardButton reply;
-        reply = QMessageBox::question(this, "Profiling", "Running profiler will clear the current project.\n Are you sure?",
+        reply = QMessageBox::question(this, "Profiling: clear current project", "Running profiler will clear the current project.\n Are you sure?",
                                       QMessageBox::Yes|QMessageBox::No);
         if (reply == QMessageBox::No)
             return;
     }
 
     mainGraph.clear();
-    QMessageBox::StandardButton shouldClean;
-    shouldClean = QMessageBox::question(this, "Profiling", "Do you want to run yarp clean before profiling?",
-                                  QMessageBox::Yes|QMessageBox::No);
-    if (shouldClean == QMessageBox::Yes)
+    QInputDialog* inputDialog = new QInputDialog(this);
+    inputDialog->setOptions(QInputDialog::NoButtons);
+
+    bool ok=false;
+
+    float timeout =  inputDialog->getDouble(NULL ,"Profiling: yarp clean",
+                                          "Do you want to run yarp clean before profiling?\n\n"
+                                          "Be aware that yarp clean with a little timetout could\n"
+                                          "unregister ports that are actually open.\n\n"
+                                           "Timeout(seconds):", 0.3, 0, 2147483647, 1, &ok);
+    if (ok)
     {
         messages.append("Cleaning death ports...");
-        NetworkProfiler::yarpClean(0.1);
+        NetworkProfiler::yarpClean(timeout);
     }
 
     messages.append("Getting the ports list...");
