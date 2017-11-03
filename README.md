@@ -1,8 +1,11 @@
 yarpviz
 =======
+
 The `yarpviz` is a graphical tool for profiling and visualizing Yarp network! 
 
 ![scenario2](/src/resources/yarpviz.png)
+
+:warning: :warning: `yarpviz` has been integrated in [YARP](https://github.com/robotology/yarp/tree/devel) (release 2.3.72).
 
 Dependencies
 ------------
